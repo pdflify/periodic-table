@@ -1,5 +1,3 @@
-
-
 import React, { Component, Fragment } from "react";
 import { elements } from "./_data";
 import Element from "./Element";

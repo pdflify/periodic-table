@@ -1,6 +1,5 @@
 import * as React from 'react'
 import '../styles/globals.css'
-import "../styles/main.css";
 import "../styles/elements.css";
 
 function MyApp({ Component, pageProps }) {
