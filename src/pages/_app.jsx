@@ -1,11 +1,13 @@
 import * as React from 'react'
 import '../styles/globals.css'
-import NavBar from 'components/NavBar'
+import "../styles/main.css";
+import "../styles/elements.css";
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
-    <NavBar />
+    
+   
     <Component {...pageProps} />
     </>
   ) 
