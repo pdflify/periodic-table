@@ -2,14 +2,16 @@ import React from "react";
 import Link from "next/link";
 
 const elementdatalist = [
-    { AtomicNumber: '1', AtomicSymbol: 'H' , AtomicName: 'Hydrogen', AtomicMass: '1.0080 u', href: '/element/hydrogen', 
-      bg: 'box-border w-16 rounded border-4 bg-amber-200', target:'_blank' },
-    { AtomicNumber: '2', AtomicSymbol: 'He' , AtomicName: 'Helium', AtomicMass: '4.00260 u', href: '/element/helium', 
-      bg: 'box-border w-16 rounded border-4 bg-orange-100', target:'_blank' },
-    { AtomicNumber: '3', AtomicSymbol: 'Li' , AtomicName: 'Lithium',  AtomicMass: '7.0 u', href: '/element/lithium', 
-      bg: 'box-border w-16 rounded border-4 bg-red-100', target:'_blank' },
-    { AtomicNumber: '4', AtomicSymbol: 'Be' , AtomicName: 'Beryllium', AtomicMass: '9.012183 u', href: '/element/beryllium', 
-      bg: 'box-border w-16 rounded border-4 bg-indigo-200', target:'_blank' },
+    { AtomicNumber: '1', AtomicSymbol: 'H' , AtomicName: 'Hydrogen', AtomicMass: '1.0080 u', href: '/element/hydrogen', bg: 'box-border w-16 rounded border-4 bg-amber-200', target:'_blank' },
+    { AtomicNumber: '2', AtomicSymbol: 'He' , AtomicName: 'Helium', AtomicMass: '4.00260 u', href: '/element/helium', bg: 'box-border w-16 rounded border-4 bg-orange-100', target:'_blank' },
+    { AtomicNumber: '3', AtomicSymbol: 'Li' , AtomicName: 'Lithium',  AtomicMass: '7.0 u', href: '/element/lithium',  bg: 'box-border w-16 rounded border-4 bg-red-100', target:'_blank' },
+    { AtomicNumber: '4', AtomicSymbol: 'Be' , AtomicName: 'Beryllium', AtomicMass: '9.012183 u', href: '/element/beryllium', bg: 'box-border w-16 rounded border-4 bg-indigo-200', target:'_blank' },
+  
+  
+  
+  
+  
+  
   ]
   
 export default function ElementlistCard() {
