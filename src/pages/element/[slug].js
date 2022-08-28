@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
+//import { useRouter } from "next/router";
 import * as fs from "fs";
 
-const Slug = (props) => {
+const Slug = (props) => { 
   function createMarkup(c) {
     return { __html: c };
   }

@@ -3,7 +3,6 @@ import { elements } from "./_data";
 import Element from "./Element";
 
 
-
 class App extends Component {
   state = {
     showInfo: false,
