@@ -29,7 +29,7 @@ export default function ElementlistCard() {
           <a>{item.AtomicName}</a>
           </Link>
           </h2>
-          <p className="text-slate-500">Atomic Mass: {item.AtomicMass}</p>
+          <p className="text-slate-500 text-xs">Atomic Mass: {item.AtomicMass}</p>
         </div>
         </div>
       ))} 

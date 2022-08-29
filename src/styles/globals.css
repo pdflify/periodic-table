@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.discovered-year { 
+    font-size: 0.14rem;
+}
+
+.atomic-number-specific{
+font-size: .6rem;
+}
+
+.chemical-symbol-specific{
+font-size: 1.6rem;
+text-anchor: middle; 
+}
+
+.chemical-name-specific{
+font-size: .4rem;
+text-anchor: middle; 
+}
+
+.atomic-weight-specific{
+    font-size: .3rem;
+text-anchor: middle; 
+
+}
