@@ -16,8 +16,8 @@ function MyApp({ Component, pageProps }) {
   height={2}
   showOnShallow={true}
 />
-  <NavBar/><main>
-    <Component {...pageProps} /></main> 
+  <NavBar/>
+    <Component {...pageProps} />
    <FooterApp/>
  </ThemeProvider>
     </>
