@@ -14,7 +14,7 @@ const Slug = (props) => {
   return (
     <>
       <Layout>
-        <section role="main" className="w-full lg:w-2/3  pt-1 lg:pr-6">
+        <section role="main" className="w-full lg:w-3/4 pt-1 lg:pr-6">
          <header>
           <ol className="list-reset flex">
             <li><Link href={'/'} ><a> Periodic Table</a></Link></li><span className="mx-1">›</span>
@@ -23,8 +23,8 @@ const Slug = (props) => {
           </ol>
           <h1 className="text-2xl">{element && element.title}</h1>
          </header>
-         <article className="antialiased text-lg">
-          <p>{element && element.AtomicSummary}</p>
+         <article className="antialiased">
+          <p className="text-lg">{element && element.AtomicSummary}</p>
           <div className="container mx-auto"><div className="my-8 lg:flex lg:items-center">
             <div className="object-cover lg:w-1/3 ">
              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 62" className="rounded-lg bg-gradient-to-r from-gray-700 via-rose-300 to-indigo-200">
@@ -51,10 +51,10 @@ const Slug = (props) => {
                 <li className="py-1"><span className="text-purple-800">Year Discovered:</span> {element && element.AtomicYear}</li>
              </ul>
             </div></div></div>
-            {element && ( <section id="History" className="prose prose-xl prose-neutral" dangerouslySetInnerHTML={createMarkup(element.History)}></section> )}
+            {element && ( <section id="History" className="max-w-full prose prose-xl prose-neutral hover:prose-a:text-purple-800 dark:prose-invert" dangerouslySetInnerHTML={createMarkup(element.History)}></section> )}
           </article>  
         </section>         
-        <aside className="w-full lg:w-1/3 px-2 ">         
+        <aside className="w-full lg:w-1/4 px-2 ">         
             <div className="flex w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 my-4">
             <div className="w-2 bg-green-400" />
               <div className="flex items-center px-2 py-3">
