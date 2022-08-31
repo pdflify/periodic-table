@@ -1,30 +1,75 @@
-import React, { useState, useEffect } from "react";
-import Layout from "components/layouts/Main";
+import React, { useState } from "react";
+import { useAmp } from 'next/amp'
+import Head from 'next/head'
+import { MainLayout } from "components/layouts";
 import Link from "next/link";
-
-//import { useRouter } from "next/router";
 import * as fs from "fs";
 
-const Slug = (props) => {
+const BlogDetails = (props) => {
   function createMarkup(c) {
     return { __html: c };
   }
   const [element, setElement] = useState(props.myElement);
-
+  const isAmp = useAmp() 
   return (
     <>
-      <Layout>
+      {isAmp ? (
+       <>
+        <Head>
+            <title>{element && element.title}</title>
+            <meta name="description" content={element && element.AtomicSummary} />
+            <link rel="canonical" href={`/elements/${element && element.slug}`} />
+        </Head>
+        <header className="main-header">
+              <nav className="blog-title">
+                <a href="https://www.t-mail.org/blog">δταcκτiχ</a>
+              </nav>
+            </header>
+            <main className="content">
+              <article className="post">
+                <header className="post-header">
+                  <h1 className="post-title">
+                  {element && element.title}
+                  </h1>
+                  <section className="post-meta">
+                    <div className="post-full-author-header">
+                      <p className="author">by t-mail.org</p>
+                      <time
+                        className="post-full-meta-date"
+                        dateTime="{blog.updatedAt}"
+                      >
+                      31/Aug/2022
+                      </time>
+                    </div>
+                  </section>
+                </header>
+                  {element && ( <section id="History" className="post-content" dangerouslySetInnerHTML={createMarkup(element.History)}></section> )}         
+              </article>
+            </main>
+            <footer className="site-footer clearfix">
+        <section className="copyright"><a href="https://t-mail.org/blog">t-mail.org</a> &copy; 2022</section>
+    </footer>		   
+       </>
+     ):(
+      <>
+      <Head>
+            <title>{element && element.title}</title>
+            <meta name="description" content={element && element.AtomicSummary} />
+            <link rel="canonical" href={`/elements/${element && element.slug}`} />
+            <link rel="amphtml" href={`/elements/${element && element.slug}?amp=1`} />
+      </Head>   
+      <MainLayout>
         <section role="main" className="w-full lg:w-3/4 pt-1 lg:pr-6">
          <header>
           <ol className="list-reset flex">
             <li><Link href={'/'} ><a> Periodic Table</a></Link></li><span className="mx-1">›</span>
-            <li><Link href={'/element'} ><a>Element</a></Link></li><span className="mx-1">›</span>
+            <li><Link href={'/elements'} ><a>Element</a></Link></li><span className="mx-1">›</span>
             <li>{element && element.btitle}</li>
           </ol>
           <h1 className="text-2xl">{element && element.title}</h1>
          </header>
          <article>
-          <p className="text-base lg:text-lg">{element && element.AtomicSummary}</p>
+          <p className="lg:text-lg">{element && element.AtomicSummary}</p>
           <div className="container mx-auto"><div className="my-8 lg:flex lg:items-center">
             <div className="lg:w-1/3 ">
              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 62" className="rounded-lg bg-gradient-to-r from-gray-700 via-rose-300 to-indigo-200">
@@ -74,10 +119,12 @@ const Slug = (props) => {
             </div>
           </div>
         </aside>
-      </Layout>
+      </MainLayout>
+      </>
+     )}  
     </>
-  );
-};
+  )
+}
 
 export async function getStaticPaths() {
   let allb = await fs.promises.readdir(`src/atomicdata`);
@@ -103,4 +150,5 @@ export async function getStaticProps(context) {
     props: { myElement: JSON.parse(myElement) }, // will be passed to the page component as props
   };
 }
-export default Slug;
+export default BlogDetails;
+export const config = { amp: 'hybrid' }

@@ -15,7 +15,7 @@ const rows = [
 
 */}
 
-import ElementApp from "components/ElementApp";
+import ElementApp from "components/HomePage/ElementApp";
 
 
 export default function Home() {
