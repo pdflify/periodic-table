@@ -23,10 +23,10 @@ const Slug = (props) => {
           </ol>
           <h1 className="text-2xl">{element && element.title}</h1>
          </header>
-         <article className="antialiased">
-          <p className="text-lg">{element && element.AtomicSummary}</p>
+         <article>
+          <p className="text-base lg:text-lg">{element && element.AtomicSummary}</p>
           <div className="container mx-auto"><div className="my-8 lg:flex lg:items-center">
-            <div className="object-cover lg:w-1/3 ">
+            <div className="lg:w-1/3 ">
              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 62" className="rounded-lg bg-gradient-to-r from-gray-700 via-rose-300 to-indigo-200">
                <path fill={element && element.AtomicBg} d="M1 1H51V61H1z" />
                <text x={3.5} y={11} className="atomic-number-specific">{element && element.AtomicNumber}</text>
@@ -38,20 +38,20 @@ const Slug = (props) => {
             </div>
             <div className="mt-6 lg:w-2/3 lg:mt-0 lg:mx-4">
              <ul className="divide-y divide-gray-200 dark:divide-gray-800 lg:text-base">
-                <li className="py-1"><span className="text-purple-800">Atomic Number:</span> {element && element.AtomicNumber}</li>
-                <li className="py-1"><span className="text-purple-800">Atomic Weight:</span> {element && element.AtomicWeight}</li>
-                <li className="py-1"><span className="text-purple-800">Melting Point:</span> {element && element.MeltingPoint}</li>
-                <li className="py-1"><span className="text-purple-800">Boiling Point:</span> {element && element.BoilingPoint}</li>
-                <li className="py-1"><span className="text-purple-800">Density:</span> {element && element.Density}</li>
-                <li className="py-1"><span className="text-purple-800">Phase at Room Temperature:</span> {element && element.PhaseAtRoomTemperature}</li>
-                <li className="py-1"><span className="text-purple-800">Element Classification:</span> {element && element.ElementClassification}</li>
-                <li className="py-1"><span className="text-purple-800">Period Number:</span> {element && element.PeriodNumber}</li>
-                <li className="py-1"><span className="text-purple-800">Group Number:</span> {element && element.GroupNumber}</li>
-                <li className="py-1"><span className="text-purple-800">Group Name:</span> {element && element.GroupName}</li>
-                <li className="py-1"><span className="text-purple-800">Year Discovered:</span> {element && element.AtomicYear}</li>
+                <li className="py-1"><span className="text-purple-800 dark:text-orange-400">Atomic Number:</span> {element && element.AtomicNumber}</li>
+                <li className="py-1"><span className="text-purple-800 dark:text-orange-400">Atomic Weight:</span> {element && element.AtomicWeight}</li>
+                <li className="py-1"><span className="text-purple-800 dark:text-orange-400">Melting Point:</span> {element && element.MeltingPoint}</li>
+                <li className="py-1"><span className="text-purple-800 dark:text-orange-400">Boiling Point:</span> {element && element.BoilingPoint}</li>
+                <li className="py-1"><span className="text-purple-800 dark:text-orange-400">Density:</span> {element && element.Density}</li>
+                <li className="py-1"><span className="text-purple-800 dark:text-orange-400">Phase at Room Temperature:</span> {element && element.PhaseAtRoomTemperature}</li>
+                <li className="py-1"><span className="text-purple-800 dark:text-orange-400">Element Classification:</span> {element && element.ElementClassification}</li>
+                <li className="py-1"><span className="text-purple-800 dark:text-orange-400">Period Number:</span> {element && element.PeriodNumber}</li>
+                <li className="py-1"><span className="text-purple-800 dark:text-orange-400">Group Number:</span> {element && element.GroupNumber}</li>
+                <li className="py-1"><span className="text-purple-800 dark:text-orange-400">Group Name:</span> {element && element.GroupName}</li>
+                <li className="py-1"><span className="text-purple-800 dark:text-orange-400">Year Discovered:</span> {element && element.AtomicYear}</li>
              </ul>
             </div></div></div>
-            {element && ( <section id="History" className="max-w-full prose prose-xl prose-neutral hover:prose-a:text-purple-800 dark:prose-invert" dangerouslySetInnerHTML={createMarkup(element.History)}></section> )}
+            {element && ( <section id="History" className="max-w-full prose prose-lg hover:prose-a:text-orange-400 dark:prose-invert" dangerouslySetInnerHTML={createMarkup(element.History)}></section> )}
           </article>  
         </section>         
         <aside className="w-full lg:w-1/4 px-2 ">         
