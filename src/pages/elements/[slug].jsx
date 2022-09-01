@@ -1,35 +1,40 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import { useAmp } from 'next/amp'
 import Head from 'next/head'
 import { MainLayout } from "components/layouts";
 import Link from "next/link";
 import * as fs from "fs";
 
-const BlogDetails = (props) => {
-  function createMarkup(c) {
-    return { __html: c };
+const BlogDetails = (props, error) => {
+  const router = useRouter();
+  const { slug } = router.query;
+   console.log({props})
+  function createMarkup(content) {
+    return { __html: content };
   }
-  const [element, setElement] = useState(props.myElement);
+ 
+  const [blog, setblog] = useState(props.myBlog);
   const isAmp = useAmp() 
   return (
     <>
       {isAmp ? (
        <>
         <Head>
-            <title>{element && element.title}</title>
-            <meta name="description" content={element && element.AtomicSummary} />
-            <link rel="canonical" href={`/elements/${element && element.slug}`} />
+            <title>{blog && blog.title}</title>
+            <meta name="description" content={blog && blog.AtomicSummary} />
+            <link rel="canonical" href={`/blogs/${blog && blog.slug}`} />
         </Head>
         <header className="main-header">
               <nav className="blog-title">
-                <a href="https://www.t-mail.org/blog">δταcκτiχ</a>
+                <a href="https://www.t-mail.org/blog">ggfgfg</a>
               </nav>
             </header>
             <main className="content">
               <article className="post">
                 <header className="post-header">
                   <h1 className="post-title">
-                  {element && element.title}
+                  {blog && blog.title}
                   </h1>
                   <section className="post-meta">
                     <div className="post-full-author-header">
@@ -43,7 +48,27 @@ const BlogDetails = (props) => {
                     </div>
                   </section>
                 </header>
-                  {element && ( <section id="History" className="post-content" dangerouslySetInnerHTML={createMarkup(element.History)}></section> )}         
+                {blog && blog.btitle}
+                {blog && blog.AtomicSummary}
+                {blog && blog.AtomicBg}
+                {blog && blog.AtomicNumber}
+              {blog && blog.AtomicYear}
+{blog && blog.AtomicSymbol}
+{blog && blog.AtomicName}
+{blog && blog.AtomicWeight}
+{blog && blog.AtomicNumber}
+ {blog && blog.AtomicNumber}
+{blog && blog.AtomicWeight}
+{blog && blog.MeltingPoint}
+{blog && blog.BoilingPoint}
+{blog && blog.Density}
+{blog && blog.PhaseAtRoomTemperature}
+{blog && blog.blogClassification}
+{blog && blog.PeriodNumber}
+{blog && blog.GroupNumber}
+{blog && blog.GroupName}
+{blog && blog.AtomicYear}
+                  {blog && ( <section  className="post-content" dangerouslySetInnerHTML={createMarkup(blog.History)}></section> )}         
               </article>
             </main>
             <footer className="site-footer clearfix">
@@ -53,50 +78,50 @@ const BlogDetails = (props) => {
      ):(
       <>
       <Head>
-            <title>{element && element.title}</title>
-            <meta name="description" content={element && element.AtomicSummary} />
-            <link rel="canonical" href={`/elements/${element && element.slug}`} />
-            <link rel="amphtml" href={`/elements/${element && element.slug}?amp=1`} />
+            <title>{blog && blog.title}</title>
+            <meta name="description" content={blog && blog.AtomicSummary} />
+            <link rel="canonical" href={`/blogs/${blog && blog.slug}`} />
+            <link rel="amphtml" href={`/blogs/${blog && blog.slug}?amp=1`} />
       </Head>   
       <MainLayout>
         <section role="main" className="w-full lg:w-3/4 pt-1 lg:pr-6">
          <header>
           <ol className="list-reset flex">
             <li><Link href={'/'} ><a> Periodic Table</a></Link></li><span className="mx-1">›</span>
-            <li><Link href={'/elements'} ><a>Element</a></Link></li><span className="mx-1">›</span>
-            <li>{element && element.btitle}</li>
+            <li><Link href={'/blogs'} ><a>blog</a></Link></li><span className="mx-1">›</span>
+            <li>{blog && blog.btitle}</li>
           </ol>
-          <h1 className="text-2xl">{element && element.title}</h1>
+          <h1 className="text-2xl">{blog && blog.title}</h1>
          </header>
          <article>
-          <p className="lg:text-lg">{element && element.AtomicSummary}</p>
+          <p className="lg:text-lg">{blog && blog.AtomicSummary}</p>
           <div className="container mx-auto"><div className="my-8 lg:flex lg:items-center">
             <div className="lg:w-1/3 ">
              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 62" className="rounded-lg bg-gradient-to-r from-gray-700 via-rose-300 to-indigo-200">
-               <path fill={element && element.AtomicBg} d="M1 1H51V61H1z" />
-               <text x={3.5} y={11} className="atomic-number-specific">{element && element.AtomicNumber}</text>
-               <text x={44.5} y={4} className="discovered-year font-thin">{element && element.AtomicYear}</text>
-               <text x={26} y={36} className="chemical-symbol-specific">{element && element.AtomicSymbol}</text>
-               <text x={26} y={50} className="chemical-name-specific">{element && element.AtomicName}</text>
-               <text x={26} y={58.5} className="atomic-weight-specific">{element && element.AtomicWeight}</text>
+               <path fill={blog && blog.AtomicBg} d="M1 1H51V61H1z" />
+               <text x={3.5} y={11} className="atomic-number-specific">{blog && blog.AtomicNumber}</text>
+               <text x={44.5} y={4} className="discovered-year font-thin">{blog && blog.AtomicYear}</text>
+               <text x={26} y={36} className="chemical-symbol-specific">{blog && blog.AtomicSymbol}</text>
+               <text x={26} y={50} className="chemical-name-specific">{blog && blog.AtomicName}</text>
+               <text x={26} y={58.5} className="atomic-weight-specific">{blog && blog.AtomicWeight}</text>
              </svg>           
             </div>
             <div className="mt-6 lg:w-2/3 lg:mt-0 lg:mx-4">
              <ul className="divide-y divide-gray-200 dark:divide-gray-800 lg:text-base">
-                <li className="py-1"><span className="text-purple-800 dark:text-orange-400">Atomic Number:</span> {element && element.AtomicNumber}</li>
-                <li className="py-1"><span className="text-purple-800 dark:text-orange-400">Atomic Weight:</span> {element && element.AtomicWeight}</li>
-                <li className="py-1"><span className="text-purple-800 dark:text-orange-400">Melting Point:</span> {element && element.MeltingPoint}</li>
-                <li className="py-1"><span className="text-purple-800 dark:text-orange-400">Boiling Point:</span> {element && element.BoilingPoint}</li>
-                <li className="py-1"><span className="text-purple-800 dark:text-orange-400">Density:</span> {element && element.Density}</li>
-                <li className="py-1"><span className="text-purple-800 dark:text-orange-400">Phase at Room Temperature:</span> {element && element.PhaseAtRoomTemperature}</li>
-                <li className="py-1"><span className="text-purple-800 dark:text-orange-400">Element Classification:</span> {element && element.ElementClassification}</li>
-                <li className="py-1"><span className="text-purple-800 dark:text-orange-400">Period Number:</span> {element && element.PeriodNumber}</li>
-                <li className="py-1"><span className="text-purple-800 dark:text-orange-400">Group Number:</span> {element && element.GroupNumber}</li>
-                <li className="py-1"><span className="text-purple-800 dark:text-orange-400">Group Name:</span> {element && element.GroupName}</li>
-                <li className="py-1"><span className="text-purple-800 dark:text-orange-400">Year Discovered:</span> {element && element.AtomicYear}</li>
+                <li className="py-1"><span className="text-purple-800 dark:text-orange-400">Atomic Number:</span> {blog && blog.AtomicNumber}</li>
+                <li className="py-1"><span className="text-purple-800 dark:text-orange-400">Atomic Weight:</span> {blog && blog.AtomicWeight}</li>
+                <li className="py-1"><span className="text-purple-800 dark:text-orange-400">Melting Point:</span> {blog && blog.MeltingPoint}</li>
+                <li className="py-1"><span className="text-purple-800 dark:text-orange-400">Boiling Point:</span> {blog && blog.BoilingPoint}</li>
+                <li className="py-1"><span className="text-purple-800 dark:text-orange-400">Density:</span> {blog && blog.Density}</li>
+                <li className="py-1"><span className="text-purple-800 dark:text-orange-400">Phase at Room Temperature:</span> {blog && blog.PhaseAtRoomTemperature}</li>
+                <li className="py-1"><span className="text-purple-800 dark:text-orange-400">blog Classification:</span> {blog && blog.blogClassification}</li>
+                <li className="py-1"><span className="text-purple-800 dark:text-orange-400">Period Number:</span> {blog && blog.PeriodNumber}</li>
+                <li className="py-1"><span className="text-purple-800 dark:text-orange-400">Group Number:</span> {blog && blog.GroupNumber}</li>
+                <li className="py-1"><span className="text-purple-800 dark:text-orange-400">Group Name:</span> {blog && blog.GroupName}</li>
+                <li className="py-1"><span className="text-purple-800 dark:text-orange-400">Year Discovered:</span> {blog && blog.AtomicYear}</li>
              </ul>
             </div></div></div>
-            {element && ( <section id="History" className="max-w-full prose prose-lg hover:prose-a:text-orange-400 dark:prose-invert" dangerouslySetInnerHTML={createMarkup(element.History)}></section> )}
+            {blog && ( <section id="History" className="max-w-full prose prose-lg hover:prose-a:text-orange-400 dark:prose-invert" dangerouslySetInnerHTML={createMarkup(blog.History)}></section> )}
           </article>  
         </section>         
         <aside className="w-full lg:w-1/4 px-2 ">         
@@ -140,14 +165,14 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
   const { slug } = context.params;
-
-  let myElement = await fs.promises.readFile(
+ 
+  let myBlog = await fs.promises.readFile(
     `src/atomicdata/${slug}.json`,
     "utf-8"
   );
-
+  
   return {
-    props: { myElement: JSON.parse(myElement) }, // will be passed to the page component as props
+    props: { myBlog: JSON.parse(myBlog) }, // will be passed to the page component as props
   };
 }
 export default BlogDetails;
