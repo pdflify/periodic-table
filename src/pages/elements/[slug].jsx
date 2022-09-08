@@ -6,15 +6,16 @@ import { MainLayout } from "components/layouts";
 import Link from "next/link";
 import * as fs from "fs";
 
-const BlogDetails = (props, error) => {
+const BlogDetails = (props) => {
   const router = useRouter();
-  const { slug } = router.query;
-   console.log({props})
+   const { myBlog } = router.query;
+   //console.log({props})
   function createMarkup(content) {
     return { __html: content };
   }
  
-  const [blog, setblog] = useState(props.myBlog);
+  const [blog] = useState(props.myBlog);
+  
   const isAmp = useAmp() 
   return (
     <>
@@ -68,7 +69,8 @@ const BlogDetails = (props, error) => {
 {blog && blog.GroupNumber}
 {blog && blog.GroupName}
 {blog && blog.AtomicYear}
-                  {blog && ( <section  className="post-content" dangerouslySetInnerHTML={createMarkup(blog.History)}></section> )}         
+                  {blog && ( <section  className="post-content" dangerouslySetInnerHTML={createMarkup(blog.History)}></section> )} 
+                  {blog && ( <section  className="post-content" dangerouslySetInnerHTML={createMarkup(blog.content)}></section> )}          
               </article>
             </main>
             <footer className="site-footer clearfix">
@@ -81,7 +83,6 @@ const BlogDetails = (props, error) => {
             <title>{blog && blog.title}</title>
             <meta name="description" content={blog && blog.AtomicSummary} />
             <link rel="canonical" href={`/blogs/${blog && blog.slug}`} />
-            <link rel="amphtml" href={`/blogs/${blog && blog.slug}?amp=1`} />
       </Head>   
       <MainLayout>
         <section role="main" className="w-full lg:w-3/4 pt-1 lg:pr-6">
@@ -122,6 +123,9 @@ const BlogDetails = (props, error) => {
              </ul>
             </div></div></div>
             {blog && ( <section id="History" className="max-w-full prose prose-lg hover:prose-a:text-orange-400 dark:prose-invert" dangerouslySetInnerHTML={createMarkup(blog.History)}></section> )}
+          
+            {blog && ( <section id="History2" className="max-w-full prose prose-lg hover:prose-a:text-orange-400 dark:prose-invert" dangerouslySetInnerHTML={createMarkup(blog.content)}></section> )}
+         
           </article>  
         </section>         
         <aside className="w-full lg:w-1/4 px-2 ">         
@@ -159,18 +163,17 @@ export async function getStaticPaths() {
   console.log(allb);
   return {
     paths: allb,
-    fallback: true, // false or 'blocking'
+    fallback: false, // false or 'blocking'
   };
 }
 
 export async function getStaticProps(context) {
   const { slug } = context.params;
- 
   let myBlog = await fs.promises.readFile(
     `src/atomicdata/${slug}.json`,
     "utf-8"
   );
-  
+
   return {
     props: { myBlog: JSON.parse(myBlog) }, // will be passed to the page component as props
   };
