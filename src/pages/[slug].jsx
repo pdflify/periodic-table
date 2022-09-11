@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { useRouter } from "next/router";
+//import { useRouter } from "next/router";
 import { useAmp } from 'next/amp'
 import Head from 'next/head'
-import { MainLayout } from "components/layouts";
 import Link from "next/link";
-import * as fs from "fs";
+import { MainLayout} from "components/layouts";
 
-const BlogDetails = (props) => {
-  const router = useRouter();
-   const { myBlog } = router.query;
+
+const BlogsDetails = (props) => {
+  //const router = useRouter();
+  // const { myBlog } = router.query;
    //console.log({props})
   function createMarkup(content) {
     return { __html: content };
@@ -20,69 +20,23 @@ const BlogDetails = (props) => {
   return (
     <>
       {isAmp ? (
-       <>
-        <Head>
-            <title>{blog && blog.title}</title>
-            <meta name="description" content={blog && blog.AtomicSummary} />
-            <link rel="canonical" href={`/blogs/${blog && blog.slug}`} />
-        </Head>
-        <header className="main-header">
-              <nav className="blog-title">
-                <a href="https://www.t-mail.org/blog">ggfgfg</a>
-              </nav>
-            </header>
-            <main className="content">
-              <article className="post">
-                <header className="post-header">
-                  <h1 className="post-title">
-                  {blog && blog.title}
-                  </h1>
-                  <section className="post-meta">
-                    <div className="post-full-author-header">
-                      <p className="author">by t-mail.org</p>
-                      <time
-                        className="post-full-meta-date"
-                        dateTime="{blog.updatedAt}"
-                      >
-                      31/Aug/2022
-                      </time>
-                    </div>
-                  </section>
-                </header>
-                {blog && blog.btitle}
-                {blog && blog.AtomicSummary}
-                {blog && blog.AtomicBg}
-                {blog && blog.AtomicNumber}
-              {blog && blog.AtomicYear}
-{blog && blog.AtomicSymbol}
-{blog && blog.AtomicName}
-{blog && blog.AtomicWeight}
-{blog && blog.AtomicNumber}
- {blog && blog.AtomicNumber}
-{blog && blog.AtomicWeight}
-{blog && blog.MeltingPoint}
-{blog && blog.BoilingPoint}
-{blog && blog.Density}
-{blog && blog.PhaseAtRoomTemperature}
-{blog && blog.blogClassification}
-{blog && blog.PeriodNumber}
-{blog && blog.GroupNumber}
-{blog && blog.GroupName}
-{blog && blog.AtomicYear}
-                  {blog && ( <section  className="post-content" dangerouslySetInnerHTML={createMarkup(blog.History)}></section> )} 
-                  {blog && ( <section  className="post-content" dangerouslySetInnerHTML={createMarkup(blog.content)}></section> )}          
-              </article>
-            </main>
-            <footer className="site-footer clearfix">
-        <section className="copyright"><a href="https://t-mail.org/blog">t-mail.org</a> &copy; 2022</section>
-    </footer>		   
-       </>
+<>
+ <Head>
+     <title>{blog && blog.title}</title>
+     <meta name="description" content="" />
+     <link rel="canonical" href={`${process.env.NEXT_PUBLIC_HOST}${blog && blog.slug}`} />
+ </Head>        
+             
+      
+      {blog && ( <section dangerouslySetInnerHTML={createMarkup(blog.History)}></section> )} 
+                
+</>
      ):(
       <>
       <Head>
             <title>{blog && blog.title}</title>
             <meta name="description" content={blog && blog.AtomicSummary} />
-            <link rel="canonical" href={`/blogs/${blog && blog.slug}`} />
+            <link rel="canonical" href={blog && blog.slug} />
       </Head>   
       <MainLayout>
         <section role="main" className="w-full lg:w-3/4 pt-1 lg:pr-6">
@@ -123,9 +77,7 @@ const BlogDetails = (props) => {
              </ul>
             </div></div></div>
             {blog && ( <section id="History" className="max-w-full prose prose-lg hover:prose-a:text-orange-400 dark:prose-invert" dangerouslySetInnerHTML={createMarkup(blog.History)}></section> )}
-          
-            {blog && ( <section id="History2" className="max-w-full prose prose-lg hover:prose-a:text-orange-400 dark:prose-invert" dangerouslySetInnerHTML={createMarkup(blog.content)}></section> )}
-         
+       
           </article>  
         </section>         
         <aside className="w-full lg:w-1/4 px-2 ">         
@@ -155,28 +107,15 @@ const BlogDetails = (props) => {
   )
 }
 
-export async function getStaticPaths() {
-  let allb = await fs.promises.readdir(`src/atomicdata`);
-  allb = allb.map((item) => {
-    return { params: { slug: item.split(".")[0] } };
-  });
-  console.log(allb);
-  return {
-    paths: allb,
-    fallback: false, // false or 'blocking'
-  };
-}
 
-export async function getStaticProps(context) {
-  const { slug } = context.params;
-  let myBlog = await fs.promises.readFile(
-    `src/atomicdata/${slug}.json`,
-    "utf-8"
-  );
-
+export async function getServerSideProps(context)  {
+  const { slug } = context.query;
+ // const { slug } = context.params;
+  let data = await fetch (`${process.env.NEXT_PUBLIC_HOST}api/getblog?slug=${slug}`)
+  let myBlog = await data.json()
   return {
-    props: { myBlog: JSON.parse(myBlog) }, // will be passed to the page component as props
-  };
+    props: { myBlog }, // will be passed to the page component as props
+  }
 }
-export default BlogDetails;
+export default BlogsDetails;
 export const config = { amp: 'hybrid' }
