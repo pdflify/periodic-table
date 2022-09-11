@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 
 export default function handler(req, res) {
-  fs.readFile(`src/atomicdata/${req.query.slug}.json`, 'utf-8', (err, data) => {
+  fs.readFile(`./public/atomicdata/${req.query.slug}.json`, 'utf-8', (err, data) => {
     if (err) {
       res.status(500).json({ error: "No such blog found" })
     }
