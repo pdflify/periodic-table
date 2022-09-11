@@ -23,7 +23,7 @@ const BlogsDetails = (props) => {
 <>
  <Head>
      <title>{blog && blog.title}</title>
-     <meta name="description" content="" />
+     <meta name="description" content="dfdfdf" />
      <link rel="canonical" href={`${process.env.NEXT_PUBLIC_HOST}${blog && blog.slug}`} />
  </Head>        
              
